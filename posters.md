@@ -11,13 +11,13 @@ Daddy, what did YOU do during the Python 3 porting?
 
 ---
 
-<a href="posters/2.png"><img src="posters/2.png" height="400" /></a>
-He volunteered for Python 3 porting
+<a href="posters/3.png"><img src="posters/3.png" height="400" /></a>
+Join the Python porting party!
 
 ---
 
-<a href="posters/3.jpg"><img src="posters/3.jpg" height="400" /></a>
-Join the Python porting party!
+<a href="posters/2.png"><img src="posters/2.png" height="400" /></a>
+He volunteered for Python 3 porting
 
 ---
 
