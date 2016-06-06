@@ -1,0 +1,434 @@
+
+<!-- saved from url=(0039)http://127.0.0.1:5000/howto/#package-it -->
+<html xmlns:xlink="http://www.w3.org/1999/xlink"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>So you want to contribute? – Python 3 Porting Database</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="icon" type="image/svg+xml" href="http://127.0.0.1:5000/howto/">
+        
+        <link rel="stylesheet" href="./So you want to contribute_ – Python 3 Porting Database_files/bootstrap.min.css">
+        <link rel="stylesheet" href="./So you want to contribute_ – Python 3 Porting Database_files/font-awesome.min.css">
+        <style>
+            
+
+            .badge {
+                min-width: 2em;
+                color: black;
+                margin-left: 0.5ex;
+            }
+            .simple-pkg-list {
+                list-style-type: none;
+                padding-left: 1em;
+            }
+            .dependents .badge {
+                min-width: 1ex;
+                min-height: 1ex;
+                font-size: 0;
+                padding: 0.75rem;
+                margin-left: 0 !important;
+            }
+            .dependents th {
+                font-weight: normal;
+            }
+            .dependents .th-collection {
+                font-size: 70%;
+            }
+            .pkgstatus-icon {
+                padding: 0;
+                min-width: 3px;
+            }
+            .note {
+                font-style: italic;
+            }
+            .iconlink span.type-alt {
+                font-size: 0;
+            }
+            nav, nav ol {
+                margin-bottom: 0 !important;
+                background-color: #F5F5F5;
+            }
+            .progress-with-legend {
+                margin-bottom: 1em;
+            }
+            .minibadge {
+                display: inline-block;
+                position: relative;
+                top: 2px;
+                min-height: 1em;
+                min-width: 1em;
+                border-radius: 3px;
+                padding: 2px;
+            }
+            .list-group .minibadge {
+                float: right;
+            }
+            .rpm-list {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                padding-left: 1em;
+            }
+            .rpm-list li .rpm-name {
+                font-weight: bold;
+            }
+            .iconlink-bug-NEW,
+            .iconlink-bug-CLOSED-DEFERRED
+                { color: #AAAAAA !important; } /* ~idle */
+            .iconlink-bug-ASSIGNED,
+            .iconlink-bug-POST,
+            .iconlink-bug-MODIFIED,
+            .iconlink-bug-ON_QA,
+            .iconlink-bug-VERIFIED,
+            .iconlink-bug-RELEASE_PENDING,
+            .iconlink-bug-CLOSED
+                { color: #F0AD4E !important; } /* ~in-progress */
+            .iconlink-bug-CLOSED-NOTABUG,
+            .iconlink-bug-CLOSED-WONTFIX,
+            .iconlink-bug-CLOSED-WORKSFORME,
+            .iconlink-bug-CLOSED-DUPLICATE,
+            .iconlink-bug-CLOSED-UPSTREAM
+            .iconlink-bug-CLOSED-CANTFIX,
+            .iconlink-bug-CLOSED-INSUFFICIENT_DATA,
+            .iconlink-bug-CLOSED-EOL
+                 { color: #D9534F !important; } /* ~blocked */
+            .iconlink-bug-CLOSED-CURRENTRELEASE,
+            .iconlink-bug-CLOSED-RAWHIDE,
+            .iconlink-bug-CLOSED-ERRATA,
+            .iconlink-bug-CLOSED-NEXTRELEASE
+                { color: #5CB85C !important; } /* ~released */
+
+            .codebox {
+                white-space: pre;
+                word-break: normal;
+                word-wrap: normal;
+            }
+
+            .global-message {
+                padding: 0.1ex;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                background-color: #888;
+                color: #000;
+            }
+            body {
+                margin-bottom: 4em;
+            }
+            
+
+            
+
+div.toc {
+    border: 1px solid black;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    padding: 10pt 10pt 0pt 10pt;
+}
+
+div.toc li {
+    font-weight: normal;
+}
+
+p.codebox {
+    border: 1px solid black;
+    background-color: #eeeeee;
+    padding: 5pt;
+}
+
+code.codebox {
+    white-space: pre;
+    word-break: normal;
+    word-wrap: normal;
+    background-color: inherit;
+}
+
+
+        </style>
+    <style>#cVim-link-container, .cVim-link-hint, #cVim-command-bar, #cVim-command-bar-mode, #cVim-command-bar-input, #cVim-command-bar-search-results, .cVim-completion-item, .cVim-completion-item .cVim-full, .cVim-completion-item .cVim-left, .cVim-completion-item .cVim-right, #cVim-hud, #cVim-status-bar {
+  font-family: Helvetica, Helvetica Neue, Neue, sans-serif, monospace, Arial;
+  font-size: 10pt !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+#cVim-link-container {
+  position: absolute;
+  pointer-events: none;
+  width: 100%; left: 0;
+  height: 100%; top: 0;
+  z-index: 2147483647;
+}
+
+.cVim-link-hint {
+  position: absolute;
+  color: #302505 !important;
+  background-color: #ffd76e !important;
+  border-radius: 2px !important;
+  padding: 2px !important;
+  font-size: 8pt !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  border: 1px solid #ad810c;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+  box-shadow: 2px 2px 1px rgba(0,0,0,0.25) !important;
+}
+
+.cVim-link-hint_match {
+  color: #777;
+  text-transform: uppercase !important;
+}
+
+#cVim-command-bar {
+  position: fixed !important;
+  z-index: 2147483646 !important;
+  background-color: #1b1d1e !important;
+  color: #bbb !important;
+  display: none;
+  box-sizing: content-box !important;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.4);
+  left: 0 !important;
+  width: 100% !important;
+  height: 20px !important;
+}
+
+#cVim-command-bar-mode {
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box !important;
+  padding-left: 2px !important;
+  height: 100% !important;
+  width: 10px !important;
+  padding-top: 2px !important;
+  color: #888 !important;
+}
+
+#cVim-command-bar-input {
+  background-color: #1b1d1e !important;
+  color: #bbb !important;
+  height: 100% !important;
+  right: 0 !important;
+  top: 0 !important;
+  width: calc(100% - 10px) !important;
+  position: absolute !important;
+}
+
+#cVim-command-bar-search-results {
+  position: fixed;
+  width: 100% !important;
+  overflow: hidden;
+  z-index: 2147483647 !important;
+  left: 0;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.4);
+  background-color: #1c1c1c;
+}
+
+.cVim-completion-item, .cVim-completion-item .cVim-full, .cVim-completion-item .cVim-left, .cVim-completion-item .cVim-right {
+  text-overflow: ellipsis;
+  padding: 1px;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.cVim-completion-item:nth-child(even) {
+  background-color: #1f1f1f;
+}
+
+.cVim-completion-item {
+  width: 100%; left: 0;
+  color: #bcbcbc;
+}
+
+.cVim-completion-item .cVim-left {
+  color: #fff;
+  width: 37%;
+}
+
+.cVim-completion-item .cVim-right {
+  font-style: italic;
+  color: #888;
+  width: 57%;
+}
+
+#cVim-hud {
+  background-color: rgba(28,28,28,0.9);
+  position: fixed !important;
+  transition: right 0.2s ease-out;
+  z-index: 24724289;
+}
+
+#cVim-hud span {
+  padding: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: #8f8f8f;
+  font-size: 10pt;
+}
+
+#cVim-frames-outline {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 9999999999;
+  box-sizing: border-box;
+  border: 3px solid yellow;
+}
+</style></head>
+    <body>
+        
+            <nav>
+                <div class="container">
+                    <ol class="breadcrumb">
+                        
+                            
+                                <li>
+                                    <a href="http://127.0.0.1:5000/">Python 3 Porting Database</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="active">So you want to contribute?</li>
+                            
+                        
+                    </ol>
+                </div>
+            </nav>
+        
+        
+
+<div class="container">
+    <div class="col-md-12">
+        <h1>So you want to contribute?</h1>
+        <p>
+            That's great! What do you want to do?
+        </p>
+
+        <div class="toc">
+            Table of Contents:
+            <ul>
+                <li><a href="http://127.0.0.1:5000/howto/#package-it">Package it</a></li>
+                <li><a href="http://127.0.0.1:5000/howto/#investigate-annotate">Investigate &amp; Annotate</a></li>
+                <li><a href="http://127.0.0.1:5000/howto/#port-it">Port it</a></li>
+            </ul>
+        </div>
+
+        <h2 id="package-it">Package it</h2>
+        <p>
+            There are currently <a href="http://127.0.0.1:5000/mispackaged/">189 packages</a> that are Python 3–ready upstream (that we know of), but not quite yet Python 3–ready in Fedora. These are labeled as "mispackaged" in PortingDB.
+        </p><p>
+            You can view the <a href="http://127.0.0.1:5000/mispackaged/">mispackaged packages</a> ordered by their last activity, so you can pick one off the top and be relatively sure nobody is currently working on it.
+            Alternatively, you can pick one of <a href="http://127.0.0.1:5000/mispackaged/?requested=1">these packages</a>, where the packager explicitly asked for someone to provide a patch since they don't have the time for it.
+        </p><p>
+            Now open the package in PortingDB (e.g. <span class="pkgstatus-icon" style="background-color: 5bc0de">&nbsp;</span>&nbsp;<a href="http://127.0.0.1:5000/pkg/maildirproc/">maildirproc</a>): The 
+        <span class="badge" style="background-color: #5bc0de !important;" title="Status: Mispackaged">
+            M
+        </span>
+     next to <i>Fedora</i> in the sidebar indicates that indeed we are dealing with a mispackaged package.
+        </p>
+        <h3>What's What</h3>
+        <p>
+            Look further down the sidebar for the headline <i>RPMs</i>. There you will see all the RPM (sub)packages contained in this package. Sometimes there's just the base package, sometimes it has several subpackages. What we want to know is if there is a (sub)package for Python 3. If there is only a Python 2 (sub)package, then we know that this package needs to be ported.
+        </p><p>
+            However, sometimes you will find a package that is still mispackaged even though it already has a Python 3 (sub)package. In those cases, something isn't quite right. Usually the Python 3 subpackage depends on both Python 3 <i>and</i> Python 2. That is unfortunate, because it basically renders the porting effort null.
+        </p>
+        <h3>Make a Patch</h3>
+        <p>
+            In either case, look a bit further down still and find a link to the associated Bugzilla report (under <i>Links→bug</i> in the sidebar). Go there and join the discussion. Find out what's the status quo and if anyone is working on it. If not, be the one that submits a patch!
+            <!-- TODO: Link for How to submit/create a patch? -->
+        </p><p>
+            To aid you in your porting effort, use the <a href="http://python-rpm-porting.readthedocs.io/">Python RPM Porting Guide</a>. If you are investigating why a Python 3 subpackage still depends on Python&nbsp;2, take a look at the <a href="http://python-rpm-porting.readthedocs.io/en/latest/application-modules.html#are-shebangs-dragging-you-down-to-python-2">section on <i>shebangs</i></a>.
+        </p>
+        <h3>Make it Happen</h3>
+        <p>
+            When you submit your patch to the associated Bugzilla report (use the <i>"Add an attachment"</i> button), be sure to ask the assgned packager to review and push it. However, as maintainers can be unresponsive for long periods of time, let us know about your patch as well so we can push it if the maintainer is unable.
+        </p><p>
+            To let us know, edit the <i>Blocks</i> field of the Bugzilla report and add the string <b>PY3PATCH-AVAILABLE</b> (you can use space as a separator). That way it will appear in our <a href="https://bugzilla.redhat.com/show_bug.cgi?id=1312032">tracking bug</a> for packages with an available patch. If need be, we'll review your patch and push it for the maintainer.
+        </p>
+        <h3>Fame and Glory</h3>
+        <p>
+            After you've done the deed, you deserve your reward! Sadly, the hand of the King's daughter and half of all the kingdom has recently become unavailable (may vary upon location, ask your nearest royal family), but fret not, you can get a <i>badge</i> of honour!
+        </p><p>
+            Visit the <a href="http://127.0.0.1:5000/howto/#TODO">wiki page for badges</a>, add a row with your <i>FAS username</i> and post a link to the Bugzilla report you helped resolve. You can get 3 badges: for your 1st, 5th and also 10th resolved package!
+            <!-- TODO: Badges wiki page. -->
+        </p>
+
+        <h2 id="investigate-annotate">Investigate &amp; Annotate</h2>
+        <p>
+            If packaging is just not your thing, don't despair! You can help also by providing information!
+        </p>
+        <h3>But it <i>is</i> Python 3 compatible upstream!</h3>
+        <h4>Idle packages</h4>
+        <p>
+            There are <a href="http://127.0.0.1:5000/#idle">981 idle packages</a> which are currently only available for Python 2 and where we don't know of their Python 3–readiness upstream. Do you know that some of them in fact do support Python 3 upstream? Great news! You can let us know by <a href="https://fedoraproject.org/wiki/User:Pviktori/Python_3_Bug_Filing">filing a bug!</a>
+            <!-- TODO: Polish the bug filing wiki page. -->
+        </p>
+        <h4>Blocked packages</h4>
+        <p>
+            The <a href="http://127.0.0.1:5000/#blocked">537 blocked packages</a> are a bit similar, but not quite. These are Python 2–only packages that, however, cannot yet be ported because some of their dependencies are still not ported to Python 3 in Fedora.
+        </p><p>
+            If you do know that some of these packages support Python 3 upstream, open the package here on PortingDB and look for the the Fedora headline in the left sidebar. If there's a 
+        <span class="badge" style="background-color: #5CB85C !important;" title="Status: Released">
+            ✔
+        </span>
+     next to it, we already know it's ready upstream. Otherwise, please let us know!
+        </p><p>
+            To make PortingDB aware that the package supports Python 3 upstream, please make a pull request on GitHub and provide the information by editing the <a href="https://github.com/fedora-python/portingdb/blob/master/data/upstream.yaml">data/upstream.yaml</a> file. People not acquainted with git can edit the file directly on GitHub by clicking on the little pencil icon on the right side above the contents of the file. Add the following:
+        </p>
+        <p class="codebox"><code class="codebox">package-name:
+    status: released
+    links:
+        bug: http://...
+        homepage: http://...
+        repo: http://...
+    note: |
+        This is a custom note. Please do NOT forget the '|'
+        on the previous line, it's important.</code></p>
+        <p>
+            Make sure to put the note inside the file in alphabetical order according to the package name. Including a link is required, chose either a <i>bug</i>, <i>homepage</i> or a <i>repo</i> link type (or a combination thereof). And the note can be any relevant text you wish or it can be omitted.
+        </p>
+        <h3>You shouldn't be using this…</h3>
+        <p>
+            There are also some packages that just won't be ported, because they were obsoleted by a different package. For example the <i>python</i> package just won't be ported, because the <i>python3</i> package came along.
+        </p><p>
+            If you know of a package which people should stop using and switch to a different one instead, please make a pull request on GitHub and provide the information by editing the <a href="https://github.com/fedora-python/portingdb/blob/master/data/fedora-update.yaml">data/fedora-update.yaml</a> file. People not acquainted with git can edit the file directly on GitHub by clicking on the little pencil icon on the right side above the contents of the file. Add the following:
+        </p>
+        <p class="codebox"><code class="codebox">package-name:
+    status: dropped
+    note: |
+        Suggested replacement: `other-package-name`
+        You are also encouraged to add a text comment like so.</code></p>
+        <p>
+            Make sure to put the note inside the file in alphabetical order according to the package name.
+        </p>
+
+        <h2 id="port-it">Port it</h2>
+        <p>
+            The vast majority of the <a href="http://127.0.0.1:5000/#idle">981 idle packages</a> are projects that are not yet ported to Python 3 upstream. We in Fedora follow the <i>upstream first</i> rule. If we need to make a change to some software (like port it to Python 3), we need to go upstream and either help the upstream team in the endeavour or offer to make the change for them.
+        </p>
+        <h3>Going Up the Stream</h3>
+        <p>
+            Pick an <a href="http://127.0.0.1:5000/#idle">idle package</a> you would like to work on (for example <span class="pkgstatus-icon" style="background-color: 5bc0de">&nbsp;</span>&nbsp;<a href="http://127.0.0.1:5000/pkg/maildirproc/">maildirproc</a>) and open it in PortingDB. Now you can click on the package name besides the blue Fedora logo towards the top of the page. This will take you to the corresponding entry in the <i>Fedora Package Database</i> and from there follow the link labelled <i>upstream</i>.
+        </p><p>
+            Sometimes, however, the upstream link gets broken. In that case go back to the package's page here on PortingDB. Follow the <i>spec file</i> link: what you'll see is a file with the metadata and building instructions for this package. Look for a line beginning with <i>Source0:</i> and try to use its URL (or part of it) to find the upstream project.
+        </p>
+        <h3>Help Wanted</h3>
+        <p>
+            First, let's make sure porting is needed as occasionally the package may be already ported, we just don't know about it yet. Look through the information on the website, the issue / bug tracker, the readme files, perhaps even the commit history. If it really is already ported, <a href="https://fedoraproject.org/wiki/User:Pviktori/Python_3_Bug_Filing">file a Fedora bug!</a>
+        </p><p>
+            Otherwise, check if someone is working on porting it, or if it is perhaps planned. If there is an issue / bug tracker try finding if someone opened a ticket for porting to Python 3. If not, open one yourself! If you find no issue / bug tracker, you can use plain old email. Offer your help with porting the software and await a response. If you want to be proactive, you can start porting and then offer a <i>pull request</i>, but beware in some cases it might not be accepted.
+        </p><p>
+            It may happen that you find the upstream is dead and the project orphaned. You can take the initiative and take over the project. Start a new repository on GitLab/GitHub/Bitbucket/what-have-you, copy the sources there and get to work!
+        </p>
+    </div>
+</div>
+
+
+        
+    
+</body><div id="cVim-status-bar" style="top: 0px;"></div><iframe src="./So you want to contribute_ – Python 3 Porting Database_files/cmdline_frame.html" id="cVim-command-frame"></iframe></html>
